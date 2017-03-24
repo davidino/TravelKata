@@ -1,0 +1,28 @@
+{
+    "name": "davidino/travel-corporation",
+    "description": "coding challenge",
+    "type": "project",
+    "authors": [
+        {
+            "name": "David Funaro",
+            "email": "ing.davidino@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "moneyphp/money": "~3"
+    },
+    "autoload": {
+        "psr-4": {"Travel\\": "src"}
+    },
+    "autoload-dev": {
+        "psr-4": { "Travel\\Tests\\": "tests/" }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6",
+        "behat/behat": "~3"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
