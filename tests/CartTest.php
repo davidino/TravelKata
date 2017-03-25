@@ -3,35 +3,28 @@
 namespace Travel\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Travel\Product;
 use Travel\Cart;
-use Travel\ProductRepository;
+use Travel\Offer\FourthMilkFree;
+use Travel\Offer\ButterAndBread;
+use Travel\InMemoryProductRepository;
 
 class CartTest extends TestCase
 {
-    /**
-     * @test
-     * @expectedException \InvalidArgumentException
-     */
-    public function should_throw_expection_when_wrong_product()
-    {
-        new Cart(new ProductRepository(), [new \stdClass()]);
-    }
 
     /**
      * @test
      */
     public function should_return_the_right_amount_of_total()
     {
-        $products = [
-            Product::named('milk'),
-            Product::named('bread'),
-            Product::named('butter'),
+        $products = ['milk',  'bread', 'butter'];
+        $offers = [
+            ButterAndBread::class,
+            FourthMilkFree::class
         ];
 
         $expectedTotal = 2.95;
 
-        $cart = new Cart(new ProductRepository(), $products);
+        $cart = new Cart(new InMemoryProductRepository(), $offers, $products);
 
         $this->assertTrue($cart->calculateTotal() == $expectedTotal);
     }

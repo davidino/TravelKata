@@ -4,22 +4,43 @@ namespace Travel;
 class Product
 {
     private $name;
+    private $price;
 
-    public function __construct($name)
+
+    /**
+     * Product constructor.
+     * @param string $name
+     * @param float $price
+     */
+    public function __construct(string $name, float $price)
     {
         $this->name = $name;
-    }
-
-    public static function named($name)
-    {
-        return new self($name);
+        $this->price = $price;
     }
 
     /**
-     * @return mixed
+     * @param string $name
+     * @param float $money
+     * @return Product
+     */
+    public static function namedAndPriced(string $name, float $money)
+    {
+        return new self($name, $money);
+    }
+
+    /**
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

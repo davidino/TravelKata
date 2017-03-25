@@ -2,41 +2,42 @@
 
 namespace Travel;
 
+use Travel\Contract\OfferInterface;
+use Travel\Contract\ProductRepositoryInterface;
+
 class Cart {
     private $products;
     private $total;
     private $repo;
 
-    public function __construct(ProductRepository $repo, array $products = [])
+    public function __construct(ProductRepositoryInterface $repo, array $offers = [], array $products = [])
     {
         $this->repo = $repo;
+        $this->total = 0;
+        $this->offers = $offers;
 
-        foreach ($products as $product) {
-            if (!$product instanceof Product) {
-                throw new \InvalidArgumentException('You can pass only Product objects');
-            }
+        foreach ($products as $productName) {
 
-            if (!$repo->findByName($product->getName())) {
-                throw new \InvalidArgumentException('Cannot find this product');
+            $product = $repo->findByName($productName);
+            if (!$product) {
+                throw new \InvalidArgumentException('Cannot find the product ' . $productName );
             }
+            $this->products[] = $product;
         }
-
-        $this->products = $products;
-
     }
 
     /**
-     * @param Product $product
+     * @param string $productName
      * @param int $qty
      */
-    public function add(Product $product, $qty = 1) {
+    public function add(string $productName, int $qty = 1) {
 
-        if (!$this->repo->findByName($product->getName())) {
-            throw new \InvalidArgumentException('the product does not exist: '. $product->getName());
+        if (!$this->repo->findByName($productName)) {
+            throw new \InvalidArgumentException('the product does not exist: '. $productName);
         }
 
         while($qty > 0) {
-            $this->products[] = $product;
+            $this->products[] = $this->repo->findByName($productName);
             $qty--;
         }
     }
@@ -45,20 +46,32 @@ class Cart {
      * @return float
      */
     public function calculateTotal() : float {
-        $total = 0;
+        $discount = 0.0;
 
         /** @var Product $product */
         foreach($this->products as $product) {
-            $price = $this->repo->getPriceByName($product->getName());
-            $total += $price;
+            $this->total += $product->getPrice();
         }
 
-        $this->total =  $total;
+        foreach ($this->offers as $offer) {
+            /** @var OfferInterface $off */
+            $off = new $offer($this->products);
+            $discount += $off->calculateDiscount();
+        }
 
-        return $total;
+        $this->total = $this->total - $discount;
+
+        return $this->total;
     }
 
-    public function getTotal(){
+    /**
+     * @return float
+     */
+    public function getTotal():float{
         return $this->total;
+    }
+
+    public function getProducts() {
+        return $this->products;
     }
 }

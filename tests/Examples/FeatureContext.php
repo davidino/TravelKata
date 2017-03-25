@@ -6,8 +6,9 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Money\Money;
 use Travel\Cart;
-use Travel\Product;
-use Travel\ProductRepository;
+use Travel\Offer\ButterAndBread;
+use Travel\Offer\FourthMilkFree;
+use Travel\InMemoryProductRepository;
 
 /**
  * Defines application features from the specific context.
@@ -25,7 +26,12 @@ class FeatureContext implements Context
      */
     public function __construct()
     {
-        $this->cart = new Cart(new ProductRepository());
+        $offers = [
+            ButterAndBread::class,
+            FourthMilkFree::class
+        ];
+
+        $this->cart = new Cart(new InMemoryProductRepository(), $offers);
     }
 
     /**
@@ -34,10 +40,7 @@ class FeatureContext implements Context
     public function theBasketHas(TableNode $table)
     {
         foreach ($table as $row) {
-            $this->cart->add(
-                Product::named($row['name']),
-                $row['qty']
-            );
+            $this->cart->add($row['name'],$row['qty']);
         }
     }
 
@@ -50,12 +53,13 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Then the total should be £:arg1
+     * @Then the total should be £:expectedTotal
      */
     public function theTotalShouldBePs($expectedTotal)
     {
-        if ($this->cart->getTotal() != $expectedTotal) {
-            throw new \Exception("Total amount is not" . $expectedTotal);
+        if (abs($this->cart->getTotal() - floatval($expectedTotal)) > 0.1){
+        //if ($this->cart->getTotal() !== floatval($expectedTotal)) {
+            throw new \Exception("Total amount is " . $this->cart->getTotal(). " instead of $expectedTotal");
         }
     }
 }

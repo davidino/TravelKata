@@ -2,7 +2,9 @@
 
 namespace Travel;
 
-class ProductRepository {
+use Travel\Contract\ProductRepositoryInterface;
+
+class InMemoryProductRepository implements ProductRepositoryInterface {
 
     private $products;
 
@@ -14,15 +16,15 @@ class ProductRepository {
         ];
     }
 
-    public function findByName($name) {
-        return array_key_exists($name, $this->products);
-    }
-
-    public function getPriceByName($name) {
+    /**
+     * @param $name
+     * @return null|Product
+     */
+    public function findByName($name) : ?Product {
         if (!array_key_exists($name, $this->products)) {
             return null;
         }
 
-        return $this->products[$name];
+        return Product::namedAndPriced($name, $this->products[$name]);
     }
 }
