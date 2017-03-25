@@ -23,7 +23,7 @@ class Product
      * @param float $money
      * @return Product
      */
-    public static function namedAndPriced(string $name, float $money)
+    public static function namedAndPriced(string $name, float $money) :Product
     {
         return new self($name, $money);
     }
@@ -31,7 +31,7 @@ class Product
     /**
      * @return string
      */
-    public function getName()
+    public function getName() :string
     {
         return $this->name;
     }
@@ -39,7 +39,7 @@ class Product
     /**
      * @return float
      */
-    public function getPrice()
+    public function getPrice() :float
     {
         return $this->price;
     }

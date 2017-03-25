@@ -2,8 +2,10 @@
 
 namespace Travel;
 
-use Travel\Product;
-
 interface ProductRepositoryInterface {
+    /**
+     * @param string $name
+     * @return null|\Travel\Product
+     */
     public function findByName(string $name) : ?Product;
 }

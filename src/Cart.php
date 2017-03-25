@@ -6,12 +6,19 @@ class Cart {
     private $products;
     private $total;
     private $repo;
+    private $offers;
 
     public function __construct(ProductRepositoryInterface $repo, array $offers = [], array $products = [])
     {
         $this->repo = $repo;
         $this->total = 0;
-        $this->offers = $offers;
+
+        foreach ($offers as $offer) {
+            if (!in_array(OfferInterface::class, class_implements($offer))) {
+                throw new \InvalidArgumentException('The Class ' . $offer . ' does not implement the OfferInterface');
+            }
+            $this->offers[] = $offer;
+        }
 
         foreach ($products as $productName) {
             if (! ($product = $repo->findByName($productName))) {
@@ -64,10 +71,13 @@ class Cart {
     /**
      * @return float
      */
-    public function getTotal():float{
+    public function getTotal(): float {
         return $this->total;
     }
 
+    /**
+     * @return array
+     */
     public function getProducts() : array {
         return $this->products;
     }

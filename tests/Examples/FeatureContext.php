@@ -60,7 +60,6 @@ class FeatureContext implements Context
     public function theTotalShouldBePs($expectedTotal)
     {
         if (abs($this->cart->getTotal() - floatval($expectedTotal)) > 0.1){
-        //if ($this->cart->getTotal() !== floatval($expectedTotal)) {
             throw new \Exception("Total amount is " . $this->cart->getTotal(). " instead of $expectedTotal");
         }
     }

@@ -33,6 +33,15 @@ class CartTest extends TestCase
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function ItShouldThrowAnExceptionWhenWrongOffersArePassed()
+    {
+        $cart = new Cart(new InMemoryProductRepository($this->catalog), [\stdClass::class], ['milk']);
+    }
+
+    /**
+     * @test
      */
     public function ItShouldAddItemsToTheCart(){
         $cart = new Cart(new InMemoryProductRepository($this->catalog), [], ['milk']);
