@@ -2,4 +2,4 @@ default:
   suites:
     default:
       paths:   [ %paths.base%/features ]
-      contexts: [ Travel\Tests\Examples\FeatureContext ]
+      contexts: [ Travel\Tests\Examples\BasketContext ]

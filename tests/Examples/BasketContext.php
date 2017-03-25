@@ -14,7 +14,7 @@ use Travel\Product;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context
+class BasketContext implements Context
 {
     private $basket;
     /** @var  Calculator */
