@@ -12,7 +12,7 @@ class ProductTest extends TestCase
      */
     public function ItShouldCreateANewProductFromNameAndAmount()
     {
-        $product = Product::namedAndPriced('named', 12.1);
+        $product = Product::namedAndPriced('oreo', 12.1);
         $this->assertInstanceOf('Travel\Product', $product);
     }
 }

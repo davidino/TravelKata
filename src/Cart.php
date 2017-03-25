@@ -2,9 +2,6 @@
 
 namespace Travel;
 
-use Travel\Contract\OfferInterface;
-use Travel\Contract\ProductRepositoryInterface;
-
 class Cart {
     private $products;
     private $total;
@@ -31,12 +28,13 @@ class Cart {
      */
     public function add(string $productName, int $qty = 1) {
 
-        if (!$this->repo->findByName($productName)) {
+        $product = $this->repo->findByName($productName);
+        if (!$product) {
             throw new \InvalidArgumentException('the product does not exist: '. $productName);
         }
 
         while($qty > 0) {
-            $this->products[] = $this->repo->findByName($productName);
+            $this->products[] = $product;
             $qty--;
         }
     }

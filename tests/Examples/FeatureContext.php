@@ -4,11 +4,10 @@ namespace Travel\Tests\Examples;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Money\Money;
 use Travel\Cart;
 use Travel\Offer\ButterAndBread;
 use Travel\Offer\FourthMilkFree;
-use Travel\InMemoryProductRepository;
+use Travel\Infrastructure\InMemoryProductRepository;
 use Travel\Product;
 
 /**

@@ -1,11 +1,8 @@
 <?php
 
-namespace Travel\Contract;
+namespace Travel;
 
 interface OfferInterface {
-
-    public function __construct(array $products);
-
     /**
      * @return float
      */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Travel\Contract;
+namespace Travel;
 
 use Travel\Product;
 

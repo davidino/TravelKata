@@ -1,8 +1,9 @@
 <?php
 
-namespace Travel;
+namespace Travel\Infrastructure;
 
-use Travel\Contract\ProductRepositoryInterface;
+use Travel\ProductRepositoryInterface;
+use Travel\Product;
 
 class InMemoryProductRepository implements ProductRepositoryInterface {
 

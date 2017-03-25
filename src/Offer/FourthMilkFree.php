@@ -2,10 +2,12 @@
 
 namespace Travel\Offer;
 
-use Travel\Contract\OfferInterface;
+use Travel\OfferInterface;
 use Travel\Product;
 
 class FourthMilkFree implements OfferInterface {
+
+    use ProductCounter;
 
     private $products;
 
@@ -18,21 +20,12 @@ class FourthMilkFree implements OfferInterface {
 
     public function calculateDiscount() :float
     {
-        $products = [];
-        $counter = [
-            'milk' => 0,
-        ];
+        $evaluation = self::evaluate($this->products);
 
-        /** @var Product $product */
-        foreach ($this->products as  $product) {
-            $productName = $product->getName();
-            if (array_key_exists($productName, $counter)) {
-                $counter[$productName]++;
-                $products[$product->getName()] = $product;
-            }
-        }
+        $products = $evaluation['list'];
+        $counter = $evaluation['counter'];
 
-        if ($counter['milk'] >= 4) {
+        if (array_key_exists('milk', $counter) && $counter['milk'] >= 4) {
             /** @var Product $milk */
             $milk = $products['milk'];
             $res = floor($counter['milk']/4);

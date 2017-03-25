@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Travel\Cart;
 use Travel\Offer\FourthMilkFree;
 use Travel\Offer\ButterAndBread;
-use Travel\InMemoryProductRepository;
+use Travel\Infrastructure\InMemoryProductRepository;
 use Travel\Product;
 
 class CartTest extends TestCase
