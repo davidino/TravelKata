@@ -14,7 +14,7 @@ class CalculatorTest extends  TestCase {
     /**
      * @test
      */
-    public function ItShouldBe(){
+    public function ItShouldCalculateTheRightTotal(){
 
         $productSelection = [
             Product::namedAndPriced('milk', 1.15),

@@ -22,6 +22,8 @@ class BasketContext implements Context
 
     private $repository;
 
+    const EPSILON = 0.1;
+
     /**
      * Initializes context.
     */
@@ -66,9 +68,9 @@ class BasketContext implements Context
     /**
      * @Then the total should be £:expectedTotal
      */
-    public function theTotalShouldBePs($expectedTotal)
+    public function theTotalShouldBe($expectedTotal)
     {
-        if (abs($this->calculator->getTotal() - floatval($expectedTotal)) > 0.1){
+        if (abs($this->calculator->getTotal() - floatval($expectedTotal)) > self::EPSILON){
             throw new \Exception("Total amount is " . $this->basket->getTotal(). " instead of $expectedTotal");
         }
     }
