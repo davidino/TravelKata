@@ -9,6 +9,7 @@ use Travel\Cart;
 use Travel\Offer\ButterAndBread;
 use Travel\Offer\FourthMilkFree;
 use Travel\InMemoryProductRepository;
+use Travel\Product;
 
 /**
  * Defines application features from the specific context.
@@ -19,19 +20,21 @@ class FeatureContext implements Context
 
     /**
      * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     */
+    */
     public function __construct()
     {
+        $productsCatalog = [
+            Product::namedAndPriced('milk', 1.15),
+            Product::namedAndPriced('bread', 1.0),
+            Product::namedAndPriced('butter', 0.80),
+        ];
+
         $offers = [
             ButterAndBread::class,
             FourthMilkFree::class
         ];
 
-        $this->cart = new Cart(new InMemoryProductRepository(), $offers);
+        $this->cart = new Cart(new InMemoryProductRepository($productsCatalog), $offers);
     }
 
     /**

@@ -11,7 +11,7 @@ class ButterAndBreadTest extends TestCase {
     /**
      * @test
      */
-    public function test_the_discount_is_applied()
+    public function ItShouldApplyTheDiscountWhenTwoButterAndOneBreadInTheCart()
     {
         $products = [
             Product::namedAndPriced('bread', 1.0),
@@ -27,7 +27,7 @@ class ButterAndBreadTest extends TestCase {
     /**
      * @test
      */
-    public function test_the_discount_is_applied_only_once()
+    public function ItShouldApplyTheDiscountWhenTwoButterAndTwoBreadInTheCart()
     {
         $products = [
             Product::namedAndPriced('bread', 1.0),
@@ -44,7 +44,7 @@ class ButterAndBreadTest extends TestCase {
     /**
      * @test
      */
-    public function test_the_discount_is_applied_twice()
+    public function ItShouldApplyTheDiscountTwiceWhenFourButterAndThreeBreadInTheCart()
     {
         $products = [
             Product::namedAndPriced('bread', 1.0),

@@ -17,11 +17,10 @@ class Cart {
         $this->offers = $offers;
 
         foreach ($products as $productName) {
-
-            $product = $repo->findByName($productName);
-            if (!$product) {
+            if (! ($product = $repo->findByName($productName))) {
                 throw new \InvalidArgumentException('Cannot find the product ' . $productName );
             }
+
             $this->products[] = $product;
         }
     }
@@ -71,7 +70,7 @@ class Cart {
         return $this->total;
     }
 
-    public function getProducts() {
+    public function getProducts() : array {
         return $this->products;
     }
 }

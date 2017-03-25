@@ -12,7 +12,7 @@ class FourthMilkFreeTest extends TestCase {
      * @test
      *
      */
-    public function discountIsAppliedWhenFourMilk()
+    public function ItShouldApplyTheDiscountWhenFourMilkAreInTheCart()
     {
         $products = [];
         $i=1;
@@ -30,7 +30,7 @@ class FourthMilkFreeTest extends TestCase {
      * @test
      *
      */
-    public function discountIsAppliedTwiceWhenFourMilk()
+    public function ItShouldApplyTheDiscountWhenMultipleOfFourMilkAreInTheCart()
     {
         $products = [];
         $i=1;
@@ -48,7 +48,7 @@ class FourthMilkFreeTest extends TestCase {
      * @test
      *
      */
-    public function discountIsAppliedYetTwiceWhenFourMilk()
+    public function ItShouldApplyTheDiscountNotMoreThenTwiceWhenTenMilkInTheCart()
     {
         $products = [];
         $i=1;
