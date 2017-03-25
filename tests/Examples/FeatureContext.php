@@ -4,7 +4,8 @@ namespace Travel\Tests\Examples;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Travel\Cart;
+use Travel\Basket;
+use Travel\Calculator;
 use Travel\Offer\ButterAndBread;
 use Travel\Offer\FourthMilkFree;
 use Travel\Infrastructure\InMemoryProductRepository;
@@ -15,7 +16,9 @@ use Travel\Product;
  */
 class FeatureContext implements Context
 {
-    private $cart;
+    private $basket;
+    /** @var  Calculator */
+    private $calculator;
 
     /**
      * Initializes context.
@@ -28,12 +31,7 @@ class FeatureContext implements Context
             Product::namedAndPriced('butter', 0.80),
         ];
 
-        $offers = [
-            ButterAndBread::class,
-            FourthMilkFree::class
-        ];
-
-        $this->cart = new Cart(new InMemoryProductRepository($productsCatalog), $offers);
+        $this->basket = new Basket(new InMemoryProductRepository($productsCatalog),[]);
     }
 
     /**
@@ -42,7 +40,7 @@ class FeatureContext implements Context
     public function theBasketHas(TableNode $table)
     {
         foreach ($table as $row) {
-            $this->cart->add($row['name'],$row['qty']);
+            $this->basket->add($row['name'],$row['qty']);
         }
     }
 
@@ -51,7 +49,12 @@ class FeatureContext implements Context
      */
     public function iTotalTheBasket()
     {
-        $this->cart->calculateTotal();
+        $offers = [
+            ButterAndBread::class,
+            FourthMilkFree::class
+        ];
+
+        $this->calculator = Calculator::calculate($this->basket, $offers);
     }
 
     /**
@@ -59,8 +62,8 @@ class FeatureContext implements Context
      */
     public function theTotalShouldBePs($expectedTotal)
     {
-        if (abs($this->cart->getTotal() - floatval($expectedTotal)) > 0.1){
-            throw new \Exception("Total amount is " . $this->cart->getTotal(). " instead of $expectedTotal");
+        if (abs($this->calculator->getTotal() - floatval($expectedTotal)) > 0.1){
+            throw new \Exception("Total amount is " . $this->basket->getTotal(). " instead of $expectedTotal");
         }
     }
 }
