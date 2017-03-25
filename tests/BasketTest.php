@@ -4,22 +4,41 @@ namespace Travel\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Travel\Basket;
-use Travel\Offer\FourthMilkFree;
-use Travel\Offer\ButterAndBread;
-use Travel\Infrastructure\InMemoryProductRepository;
 use Travel\Product;
 
 class BasketTest extends TestCase
 {
-    private $catalog;
-
-    public function setup()
+    /**
+     * @test
+     */
+    public function ItShouldInitializeAnEmptyBasket()
     {
-        $this->catalog = [
-            Product::namedAndPriced('milk', 1.15),
-            Product::namedAndPriced('bread', 1.0),
-            Product::namedAndPriced('butter', 0.80),
-        ];
+        $basket = Basket::initializeEmtpy();
+
+        $this->assertCount(0, $basket->getProducts());
+    }
+
+    /**
+     * @test
+     */
+    public function ItShouldInitializeABasketWithProducts()
+    {
+        $basket = Basket::initializeWithProducts([
+            Product::namedAndPriced('bread',1.0),
+            Product::namedAndPriced('milk',1.5),
+        ]);
+
+        $this->assertCount(2, $basket->getProducts());
+    }
+
+    /**
+     * @test
+     */
+    public function ItShouldAddItemsToTheCart() {
+        $basket = new Basket([Product::namedAndPriced('milk',1.0)]);
+        $basket->add(Product::namedAndPriced('bread',1.0), 2);
+
+        $this->assertCount(3, $basket->getProducts());
     }
 
     /**
@@ -28,17 +47,6 @@ class BasketTest extends TestCase
      */
     public function ItShouldThrowAnExceptionWhenTheProductDoesNotExists()
     {
-        $basket = new Basket(new InMemoryProductRepository($this->catalog), ['oreo']);
-    }
-
-    /**
-     * @test
-     */
-    public function ItShouldAddItemsToTheCart(){
-        $basket = new Basket(new InMemoryProductRepository($this->catalog), ['milk']);
-
-        $basket->add('bread',2);
-
-        $this->assertCount(3, $basket->getProducts());
+        Basket::initializeWithProducts(['oreo']);
     }
 }

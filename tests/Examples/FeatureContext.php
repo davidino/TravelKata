@@ -20,6 +20,8 @@ class FeatureContext implements Context
     /** @var  Calculator */
     private $calculator;
 
+    private $repository;
+
     /**
      * Initializes context.
     */
@@ -31,7 +33,9 @@ class FeatureContext implements Context
             Product::namedAndPriced('butter', 0.80),
         ];
 
-        $this->basket = new Basket(new InMemoryProductRepository($productsCatalog),[]);
+        $this->repository = new InMemoryProductRepository($productsCatalog);
+
+        $this->basket = Basket::initializeEmtpy();
     }
 
     /**
@@ -40,7 +44,9 @@ class FeatureContext implements Context
     public function theBasketHas(TableNode $table)
     {
         foreach ($table as $row) {
-            $this->basket->add($row['name'],$row['qty']);
+            if($prod = $this->repository->findByName($row['name'])) {
+                $this->basket->add($prod, $row['qty']);
+            }
         }
     }
 

@@ -6,7 +6,7 @@ class Calculator {
 
     private $total;
 
-    public function __construct(Basket $basket, array $offers)
+    public function __construct(BasketInterface $basket, array $offers)
     {
         foreach ($offers as $offer) {
             if (!in_array(OfferInterface::class, class_implements($offer))) {
@@ -33,7 +33,7 @@ class Calculator {
         $this->total = $total - $discount;
     }
 
-    public static function calculate(Basket $basket, array $offers)
+    public static function calculate(BasketInterface $basket, array $offers)
     {
         return new self($basket, $offers);
     }

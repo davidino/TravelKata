@@ -2,34 +2,32 @@
 
 namespace Travel;
 
-class Basket {
-    private $products;
-    private $repo;
+class Basket implements BasketInterface {
+    private $products = [];
 
-    public function __construct(ProductRepositoryInterface $repo, array $products = [])
+    public function __construct(array $products = [])
     {
-        $this->repo = $repo;
-
-        foreach ($products as $productName) {
-            if (! ($product = $repo->findByName($productName))) {
-                throw new \InvalidArgumentException('Cannot find the product ' . $productName );
+        foreach ($products as $product) {
+            if (!$product instanceof Product) {
+                throw new \InvalidArgumentException('Must provide a Product object');
             }
-
             $this->products[] = $product;
         }
     }
 
+    public static function initializeEmtpy() {
+        return new self([]);
+    }
+
+    public static function initializeWithProducts($products) {
+        return new self($products);
+    }
+
     /**
-     * @param string $productName
+     * @param Product $product
      * @param int $qty
      */
-    public function add(string $productName, int $qty = 1) {
-
-        $product = $this->repo->findByName($productName);
-        if (!$product) {
-            throw new \InvalidArgumentException('the product does not exist: '. $productName);
-        }
-
+    public function add(Product $product, int $qty = 1) {
         while($qty > 0) {
             $this->products[] = $product;
             $qty--;
