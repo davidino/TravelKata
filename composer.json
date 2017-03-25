@@ -10,7 +10,6 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "moneyphp/money": "~3"
     },
     "autoload": {
         "psr-4": {"Travel\\": "src"}

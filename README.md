@@ -15,7 +15,10 @@ docker run davidino/travel
 
 the output:
 ```
-Feature: test
+Feature: customer basket that allows a customer to
+         add products and provides a total cost of the basket
+         including applicable discounts.
+         
 
   Scenario:                        
     Given the basket has:          
@@ -58,4 +61,19 @@ Feature: test
 
 ```sh
 docker run davidino/travel bin/phpunit
+```
+
+output:
+
+```
+PHPUnit 6.1-gf671214 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.1.3
+Configuration: /Users/davidino/projects/challenge/travelCorporation/phpunit.xml.dist
+
+..........                                                        10 / 10 (100%)
+
+Time: 72 ms, Memory: 4.00MB
+
+OK (10 tests, 10 assertions
 ```
