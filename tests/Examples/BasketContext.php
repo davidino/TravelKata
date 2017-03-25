@@ -17,10 +17,9 @@ use Travel\Product;
 class BasketContext implements Context
 {
     private $basket;
+    private $repository;
     /** @var  Calculator */
     private $calculator;
-
-    private $repository;
 
     const EPSILON = 0.1;
 
@@ -29,13 +28,11 @@ class BasketContext implements Context
     */
     public function __construct()
     {
-        $productsCatalog = [
+        $this->repository = new InMemoryProductRepository([
             Product::namedAndPriced('milk', 1.15),
             Product::namedAndPriced('bread', 1.0),
             Product::namedAndPriced('butter', 0.80),
-        ];
-
-        $this->repository = new InMemoryProductRepository($productsCatalog);
+        ]);
 
         $this->basket = Basket::initializeEmtpy();
     }
@@ -71,7 +68,7 @@ class BasketContext implements Context
     public function theTotalShouldBe($expectedTotal)
     {
         if (abs($this->calculator->getTotal() - floatval($expectedTotal)) > self::EPSILON){
-            throw new \Exception("Total amount is " . $this->basket->getTotal(). " instead of $expectedTotal");
+            throw new \Exception("Total amount is " . $this->calculator->getTotal(). " instead of $expectedTotal");
         }
     }
 }
