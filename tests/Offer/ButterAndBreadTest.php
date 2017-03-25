@@ -3,7 +3,7 @@
 namespace Travel\Tests\Offer;
 
 use PHPUnit\Framework\TestCase;
-use Travel\Offer\ButterAndBread;
+use Travel\Offer\BreadFreeEveryTwoButterOffer;
 use Travel\Product;
 
 class ButterAndBreadTest extends TestCase {
@@ -19,7 +19,7 @@ class ButterAndBreadTest extends TestCase {
             Product::namedAndPriced('butter', 0.8),
         ];
 
-        $offer = new ButterAndBread($products);
+        $offer = new BreadFreeEveryTwoButterOffer($products);
 
         $this->assertEquals($offer->calculateDiscount(), 0.5);
     }
@@ -36,7 +36,7 @@ class ButterAndBreadTest extends TestCase {
             Product::namedAndPriced('butter', 0.80),
         ];
 
-        $offer = new ButterAndBread($products);
+        $offer = new BreadFreeEveryTwoButterOffer($products);
 
         $this->assertEquals($offer->calculateDiscount(), 0.5);
     }
@@ -56,7 +56,7 @@ class ButterAndBreadTest extends TestCase {
             Product::namedAndPriced('butter', 0.80),
         ];
 
-        $offer = new ButterAndBread($products);
+        $offer = new BreadFreeEveryTwoButterOffer($products);
 
         $this->assertEquals($offer->calculateDiscount(), 1.0);
     }

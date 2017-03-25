@@ -5,8 +5,8 @@ namespace Trave\Test;
 use PHPUnit\Framework\TestCase;
 use Travel\Basket;
 use Travel\Calculator;
-use Travel\Offer\ButterAndBread;
-use Travel\Offer\FourthMilkFree;
+use Travel\Offer\BreadFreeEveryTwoButterOffer;
+use Travel\Offer\FourthMilkFreeOffer;
 use Travel\Product;
 
 class CalculatorTest extends  TestCase {
@@ -24,8 +24,8 @@ class CalculatorTest extends  TestCase {
         $basket = new Basket($productSelection);
 
         $offers = [
-            ButterAndBread::class,
-            FourthMilkFree::class
+            BreadFreeEveryTwoButterOffer::class,
+            FourthMilkFreeOffer::class
         ];
 
         $calculator = Calculator::calculate($basket, $offers);

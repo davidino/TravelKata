@@ -6,8 +6,8 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Travel\Basket;
 use Travel\Calculator;
-use Travel\Offer\ButterAndBread;
-use Travel\Offer\FourthMilkFree;
+use Travel\Offer\BreadFreeEveryTwoButterOffer;
+use Travel\Offer\FourthMilkFreeOffer;
 use Travel\Infrastructure\InMemoryProductRepository;
 use Travel\Product;
 
@@ -56,8 +56,8 @@ class BasketContext implements Context
     public function iTotalTheBasket()
     {
         $offers = [
-            ButterAndBread::class,
-            FourthMilkFree::class
+            BreadFreeEveryTwoButterOffer::class,
+            FourthMilkFreeOffer::class
         ];
 
         $this->calculator = Calculator::calculate($this->basket, $offers);

@@ -3,7 +3,7 @@
 namespace Travel\Tests\Offer;
 
 use PHPUnit\Framework\TestCase;
-use Travel\Offer\FourthMilkFree;
+use Travel\Offer\FourthMilkFreeOffer;
 use Travel\Product;
 
 class FourthMilkFreeTest extends TestCase {
@@ -21,7 +21,7 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 4);
 
-        $offer = new FourthMilkFree($products);
+        $offer = new FourthMilkFreeOffer($products);
 
         $this->assertEquals($offer->calculateDiscount(), 1.15);
     }
@@ -39,7 +39,7 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 8);
 
-        $offer = new FourthMilkFree($products);
+        $offer = new FourthMilkFreeOffer($products);
 
         $this->assertEquals($offer->calculateDiscount(), 2.3);
     }
@@ -57,7 +57,7 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 10);
 
-        $offer = new FourthMilkFree($products);
+        $offer = new FourthMilkFreeOffer($products);
 
         $this->assertEquals($offer->calculateDiscount(), 2.3);
     }

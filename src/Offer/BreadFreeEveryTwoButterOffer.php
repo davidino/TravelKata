@@ -5,7 +5,7 @@ namespace Travel\Offer;
 use Travel\OfferInterface;
 use Travel\Product;
 
-class ButterAndBread implements OfferInterface {
+class BreadFreeEveryTwoButterOffer implements OfferInterface {
 
     use ProductCounter;
 
