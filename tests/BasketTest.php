@@ -35,7 +35,7 @@ class BasketTest extends TestCase
      * @test
      */
     public function ItShouldAddItemsToTheCart() {
-        $basket = new Basket([Product::namedAndPriced('milk',1.0)]);
+        $basket = Basket::initializeWithProducts([Product::namedAndPriced('milk',1.0)]);
         $basket->add(Product::namedAndPriced('bread',1.0), 2);
 
         $this->assertCount(3, $basket->getProducts());

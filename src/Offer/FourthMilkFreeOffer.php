@@ -2,17 +2,19 @@
 
 namespace Travel\Offer;
 
-use Travel\OfferInterface;
+use Travel\BasketInterface;
 use Travel\Product;
+use Travel\DiscountCalculator;
 
-class FourthMilkFreeOffer implements OfferInterface {
+class FourthMilkFreeOffer extends DiscountCalculator {
 
     use ProductCounter;
 
     // Buy 3 Milk and get the 4th milk for free
 
-    public static function calculateDiscount(array $products) :float
+    public function calculateDiscount(BasketInterface $basket) :float
     {
+        $products = $basket->getProducts();
         $evaluation = self::evaluate($products);
 
         $products = $evaluation['list'];

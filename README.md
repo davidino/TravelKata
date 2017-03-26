@@ -1,19 +1,19 @@
 # Travel Cart
 
 
-Build the container:
+#### Build the container:
 
 ```sh
 docker build -t davidino/travel .
 ```
 
-Run test container:
+#### Running Business expectation [Behat](http://behat.org/en/latest/):
 
 ```sh
-docker run davidino/travel
+docker run davidino/travel bin/behat
 ```
 
-the output:
+output:
 ```
 Feature: customer basket that allows a customer to
          add products and provides a total cost of the basket
@@ -58,6 +58,7 @@ Feature: customer basket that allows a customer to
 0m0.02s (7.66Mb)
 ```
 
+#### Running Unit Test [phpunit](https://phpunit.de):
 
 ```sh
 docker run davidino/travel bin/phpunit
@@ -71,9 +72,13 @@ PHPUnit 6.1-gf671214 by Sebastian Bergmann and contributors.
 Runtime:       PHP 7.1.3
 Configuration: /Users/davidino/projects/challenge/travelCorporation/phpunit.xml.dist
 
-..........                                                        10 / 10 (100%)
+..............                                                    14 / 14 (100%)
 
-Time: 72 ms, Memory: 4.00MB
+Time: 71 ms, Memory: 4.00MB
 
-OK (10 tests, 10 assertions
+OK (14 tests, 14 assertions)
 ```
+
+#### Books:
+* Implementing Domain-Driven Design
+* Test Driven Development: By Example

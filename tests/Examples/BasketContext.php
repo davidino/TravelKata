@@ -54,12 +54,10 @@ class BasketContext implements Context
      */
     public function iTotalTheBasket()
     {
-        $offers = [
-            BreadFreeEveryTwoButterOffer::class,
-            FourthMilkFreeOffer::class
-        ];
+        $discountCalculator = new BreadFreeEveryTwoButterOffer();
+        $discountCalculator->setSuccessor(new FourthMilkFreeOffer());
 
-        $this->calculator = Calculator::calculate($this->basket, $offers);
+        $this->calculator = Calculator::calculate($this->basket, $discountCalculator);
     }
 
     /**

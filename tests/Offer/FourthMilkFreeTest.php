@@ -3,10 +3,18 @@
 namespace Travel\Tests\Offer;
 
 use PHPUnit\Framework\TestCase;
+use Travel\Basket;
+use Travel\DiscountCalculator;
 use Travel\Offer\FourthMilkFreeOffer;
 use Travel\Product;
 
 class FourthMilkFreeTest extends TestCase {
+    /** @var FourthMilkFreeOffer  */
+    private $offer;
+
+    public function setup() {
+        $this->offer = new FourthMilkFreeOffer();
+    }
 
     /**
      * @test
@@ -21,7 +29,9 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 4);
 
-        $discount = FourthMilkFreeOffer::calculateDiscount($products);
+        $basket = $this->prophesize(Basket::class);
+        $basket->getProducts()->willReturn($products);
+        $discount = $this->offer->calculateDiscount($basket->reveal());
 
         $this->assertEquals($discount, 1.15);
     }
@@ -39,7 +49,10 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 8);
 
-        $discount = FourthMilkFreeOffer::calculateDiscount($products);
+        $basket = $this->prophesize(Basket::class);
+        $basket->getProducts()->willReturn($products);
+
+        $discount = $this->offer->calculateDiscount($basket->reveal());
 
         $this->assertEquals($discount , 2.3);
     }
@@ -57,7 +70,9 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 10);
 
-        $discount = FourthMilkFreeOffer::calculateDiscount($products);
+        $basket = $this->prophesize(Basket::class);
+        $basket->getProducts()->willReturn($products);
+        $discount = $this->offer->calculateDiscount($basket->reveal());
 
         $this->assertEquals($discount, 2.3);
     }

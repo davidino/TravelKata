@@ -6,35 +6,26 @@ class Calculator {
 
     private $total;
 
-    public function __construct(BasketInterface $basket, array $offers)
+    public function __construct(BasketInterface $basket, DiscountCalculator $discountCalculator = null)
     {
-        foreach ($offers as $offer) {
-            if (!in_array(OfferInterface::class, class_implements($offer))) {
-                throw new \InvalidArgumentException('The Class ' . $offer . ' does not implement the OfferInterface');
-            }
-        }
-
         $this->total = 0;
-
-        $total = 0.0;
-        $discount = 0.0;
+        $discount = 0;
 
         /** @var Product $product */
         foreach($basket->getProducts() as $product) {
-            $total += $product->getPrice();
+            $this->total += $product->getPrice();
         }
 
-        foreach ($offers as $offer) {
-            /** @var OfferInterface $off */
-            $discount += $offer::calculateDiscount($basket->getProducts());
+        if ($discountCalculator) {
+            $discount = $discountCalculator->handle($basket);
         }
 
-        $this->total = $total - $discount;
+        $this->total -= $discount;
     }
 
-    public static function calculate(BasketInterface $basket, array $offers)
+    public static function calculate(BasketInterface $basket, DiscountCalculator $discountCalculator = null)
     {
-        return new self($basket, $offers);
+        return new self($basket, $discountCalculator);
     }
 
     public function getTotal() {
