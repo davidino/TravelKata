@@ -9,18 +9,11 @@ class FourthMilkFreeOffer implements OfferInterface {
 
     use ProductCounter;
 
-    private $products;
-
-    public function __construct(array $products)
-    {
-        $this->products = $products;
-    }
-
     // Buy 3 Milk and get the 4th milk for free
 
-    public function calculateDiscount() :float
+    public static function calculateDiscount(array $products) :float
     {
-        $evaluation = self::evaluate($this->products);
+        $evaluation = self::evaluate($products);
 
         $products = $evaluation['list'];
         $counter = $evaluation['counter'];

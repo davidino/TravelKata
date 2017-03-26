@@ -6,7 +6,7 @@ use Travel\Product;
 
 trait ProductCounter {
 
-    public function evaluate($products) {
+    public static function evaluate($products) {
 
         $counter = [];
         $list = [];

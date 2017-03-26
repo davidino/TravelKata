@@ -21,9 +21,9 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 4);
 
-        $offer = new FourthMilkFreeOffer($products);
+        $discount = FourthMilkFreeOffer::calculateDiscount($products);
 
-        $this->assertEquals($offer->calculateDiscount(), 1.15);
+        $this->assertEquals($discount, 1.15);
     }
 
     /**
@@ -39,9 +39,9 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 8);
 
-        $offer = new FourthMilkFreeOffer($products);
+        $discount = FourthMilkFreeOffer::calculateDiscount($products);
 
-        $this->assertEquals($offer->calculateDiscount(), 2.3);
+        $this->assertEquals($discount , 2.3);
     }
 
     /**
@@ -57,9 +57,9 @@ class FourthMilkFreeTest extends TestCase {
             $i++;
         } while ($i <= 10);
 
-        $offer = new FourthMilkFreeOffer($products);
+        $discount = FourthMilkFreeOffer::calculateDiscount($products);
 
-        $this->assertEquals($offer->calculateDiscount(), 2.3);
+        $this->assertEquals($discount, 2.3);
     }
 
 }

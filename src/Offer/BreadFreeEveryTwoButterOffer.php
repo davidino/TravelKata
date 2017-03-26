@@ -9,16 +9,9 @@ class BreadFreeEveryTwoButterOffer implements OfferInterface {
 
     use ProductCounter;
 
-    private $products;
-
-    public function __construct(array $products)
+    public static function calculateDiscount(array $products) :float
     {
-        $this->products = $products;
-    }
-
-    public function calculateDiscount() :float
-    {
-        $evaluation = self::evaluate($this->products);
+        $evaluation = self::evaluate($products);
 
         $products = $evaluation['list'];
         $counter = $evaluation['counter'];

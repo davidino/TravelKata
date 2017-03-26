@@ -26,8 +26,7 @@ class Calculator {
 
         foreach ($offers as $offer) {
             /** @var OfferInterface $off */
-            $off = new $offer($basket->getProducts());
-            $discount += $off->calculateDiscount();
+            $discount += $offer::calculateDiscount($basket->getProducts());
         }
 
         $this->total = $total - $discount;

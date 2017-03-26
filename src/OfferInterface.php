@@ -4,7 +4,8 @@ namespace Travel;
 
 interface OfferInterface {
     /**
+     * @param array $product
      * @return float
      */
-    public function calculateDiscount():float ;
+    public static function calculateDiscount(array $product):float ;
 }

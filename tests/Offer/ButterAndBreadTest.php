@@ -19,9 +19,9 @@ class ButterAndBreadTest extends TestCase {
             Product::namedAndPriced('butter', 0.8),
         ];
 
-        $offer = new BreadFreeEveryTwoButterOffer($products);
+        $discount = BreadFreeEveryTwoButterOffer::calculateDiscount($products);
 
-        $this->assertEquals($offer->calculateDiscount(), 0.5);
+        $this->assertEquals($discount, 0.5);
     }
 
     /**
@@ -36,9 +36,9 @@ class ButterAndBreadTest extends TestCase {
             Product::namedAndPriced('butter', 0.80),
         ];
 
-        $offer = new BreadFreeEveryTwoButterOffer($products);
+        $discount = BreadFreeEveryTwoButterOffer::calculateDiscount($products);
 
-        $this->assertEquals($offer->calculateDiscount(), 0.5);
+        $this->assertEquals($discount , 0.5);
     }
 
     /**
@@ -56,9 +56,9 @@ class ButterAndBreadTest extends TestCase {
             Product::namedAndPriced('butter', 0.80),
         ];
 
-        $offer = new BreadFreeEveryTwoButterOffer($products);
+        $discount = BreadFreeEveryTwoButterOffer::calculateDiscount($products);
 
-        $this->assertEquals($offer->calculateDiscount(), 1.0);
+        $this->assertEquals($discount, 1.0);
     }
 
 }
