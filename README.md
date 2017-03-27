@@ -79,6 +79,12 @@ Time: 71 ms, Memory: 4.00MB
 OK (14 tests, 14 assertions)
 ```
 
+### Implementation details:
+
+ * the business tests cases are expressed by the `features/basket.feature` and they are implemented by the test `tests/Examples/BasketContext`.
+ * the implementation of the offers is a pattern similar to the `chain of responsability`.
+ * The class responsible for calculate the total amount of the basket is the `Calculator` class. `DiscountCalculator` is a collaborator that is responsible to calculate the total amount of the discount.
+
 #### Books:
 * Implementing Domain-Driven Design
 * Test Driven Development: By Example
